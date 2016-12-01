@@ -394,9 +394,9 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator {
         foreach ($table->columns as $column) {
             if ($column->autoIncrement) {
                 continue;
-            }
-            if (!$column->allowNull && $column->defaultValue === null) {
-                if($this->isTree && in_array($column->name,['lft', 'rgt', 'lvl'])){
+            }  //if it is a uuid column then do not ask from the user to enter it
+            if (!$column->allowNull && $column->defaultValue === null ) {
+                if(($this->isTree && in_array($column->name,['lft', 'rgt', 'lvl'])) || ($column->name==$this->UUIDColumn)){
 
                 }else{
                     $types['required'][] = $column->name;
@@ -424,11 +424,20 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator {
                     $types['safe'][] = $column->name;
                     break;
                 default: // strings
+                    if ($column->name == $this->UUIDColumn)
+                    {  //uuid validation
+                        $types['gvasilopulos\enhancedgii\validators\UuidValidator'][] = $column->name;
+                    }
+                    else
+                    {
                     if ($column->size > 0) {
                         $lengths[$column->size][] = $column->name;
                     } else {
                         $types['string'][] = $column->name;
                     }
+                    }
+                   
+                    
             }
         }
         $rules = [];
