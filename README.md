@@ -1,12 +1,7 @@
 # yii2-enhanced-gii
-Yii2 Gii (generator) with Relation
+Yii2 Gii (generator) with Relation forked from https://github.com/mootensai/yii2-enhanced-gii
 
-[![Latest Stable Version](https://poser.pugx.org/mootensai/yii2-enhanced-gii/v/stable)](https://packagist.org/packages/mootensai/yii2-enhanced-gii)
-[![License](https://poser.pugx.org/mootensai/yii2-enhanced-gii/license)](https://packagist.org/packages/mootensai/yii2-enhanced-gii)
-[![Total Downloads](https://poser.pugx.org/mootensai/yii2-enhanced-gii/downloads)](https://packagist.org/packages/mootensai/yii2-enhanced-gii)
-[![Monthly Downloads](https://poser.pugx.org/mootensai/yii2-enhanced-gii/d/monthly)](https://packagist.org/packages/mootensai/yii2-enhanced-gii)
-[![Daily Downloads](https://poser.pugx.org/mootensai/yii2-enhanced-gii/d/daily)](https://packagist.org/packages/mootensai/yii2-enhanced-gii)
-[![Join the chat at https://gitter.im/mootensai/yii2-enhanced-gii](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mootensai/yii2-enhanced-gii?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 
 
 [![Yii2](https://img.shields.io/badge/Powered_by-Yii_Framework-green.svg?style=flat)](http://www.yiiframework.com/)
@@ -17,7 +12,7 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```bash
-$ composer require mootensai/yii2-enhanced-gii:dev-master
+$ composer require gvasilopulos/yii2-enhanced-gii:dev-master
 $ composer require kartik-v/yii2-mpdf:dev-master # if you want to use pdf exporter 
 $ composer require kartik-v/yii2-tree-manager:dev-master # if you want to use tree/nested relation table
 ```
@@ -25,7 +20,7 @@ $ composer require kartik-v/yii2-tree-manager:dev-master # if you want to use tr
 or add
 
 ```
-"mootensai/yii2-enhanced-gii": "dev-master",
+"gvasilopulos/yii2-enhanced-gii": "dev-master",
 "kartik-v/yii2-mpdf": "dev-master",
 "kartik-v/yii2-tree-manager": "dev-master"
 ```
@@ -73,7 +68,7 @@ Go to your gii tools, and notice the new IO Generator for models & CRUD
 1. Generate optimistic lock
 2. Generate Timestamp Behaviors
 3. Generate Blameable Behavior
-4. Generate UUID Behavior
+4. Generate UUID Behavior and uuid's through php (default behavior)
 
 ## CRUD :
 1. Generate all CRUD with wildcard (*) of table
@@ -132,3 +127,5 @@ I'm open for any improvement
 2. kartik-v (https://github.com/kartik-v) for most of widgets
 3. schmunk42 (https://github.com/schmunk42) for bootstrap & model base & extension
 4. mdmunir (https://github.com/mdmunir) for JsBlock & Migration Generator (from https://github.com/deesoft/yii2-gii)
+5. thamtech for uuid helpers/validators
+6. wartron UUID behavior

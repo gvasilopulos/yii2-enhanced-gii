@@ -6,7 +6,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace mootensai\enhancedgii\model;
+namespace gvasilopulos\enhancedgii\model;
 
 use Yii;
 use yii\base\NotSupportedException;
@@ -29,7 +29,7 @@ use yii\helpers\Inflector;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class Generator extends \mootensai\enhancedgii\BaseGenerator {
+class Generator extends \gvasilopulos\enhancedgii\BaseGenerator {
 
     /* @var $tableSchema TableSchema */
 

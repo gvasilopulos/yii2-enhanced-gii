@@ -4,7 +4,7 @@
  */
 
 /* @var $this yii\web\View */
-/* @var $generator mootensai\enhancedgii\crud\Generator */
+/* @var $generator gvasilopulos\enhancedgii\crud\Generator */
 /* @var $tableName string full table name */
 /* @var $className string class name */
 /* @var $queryClassName string query class name */
@@ -26,7 +26,7 @@ use yii\behaviors\TimestampBehavior;
 use yii\behaviors\BlameableBehavior;
 <?php endif; ?>
 <?php if ($generator->UUIDColumn): ?>
-use mootensai\behaviors\UUIDBehavior;
+use \gvasilopulos\enhancedgii\behaviors\UUIDBehavior;
 <?php endif; ?>
 
 /**
