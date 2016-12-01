@@ -1,6 +1,6 @@
 <?php
 //original credits to wartron/uuid
-namespace gvasilopulos\enhancedgii;
+namespace gvasilopulos\enhancedgii\behaviors;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
 use gvasilopulos\enhancedgii\helpers\UuidHelper;
