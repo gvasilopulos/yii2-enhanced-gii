@@ -2,6 +2,7 @@
 Yii2 Gii (generator) with Relation forked from https://github.com/mootensai/yii2-enhanced-gii
 
 Specific for postgres with uuid id's generated from php through ramsey/uuid
+Beware! This extension does not use uuid-oosp functions it generates v4 uuid with UUID behaviour 
 
 You have to add this to your configuration db connection setting so it detects uuid column properly
 
@@ -136,5 +137,6 @@ I'm open for any improvement
 2. kartik-v (https://github.com/kartik-v) for most of widgets
 3. schmunk42 (https://github.com/schmunk42) for bootstrap & model base & extension
 4. mdmunir (https://github.com/mdmunir) for JsBlock & Migration Generator (from https://github.com/deesoft/yii2-gii)
-5. thamtech for uuid helpers/validators
-6. wartron UUID behavior
+5. thamtech (https://github.com/thamtech/yii2-uuid) for uuid helpers/validators
+6. wartron (https://github.com/wartron/yii2-uuid) UUID behavior 
+7. fgh151 (https://github.com/fgh151/yii2-postgresql-array-field) for guidance through schema customization
