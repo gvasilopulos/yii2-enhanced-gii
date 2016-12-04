@@ -4,7 +4,8 @@ namespace gvasilopulos\enhancedgii\crud;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\db\ColumnSchema;
-use yii\db\Schema;
+//use yii\db\Schema;
+use gvasilopulos\enhancedgii\db\pgsql\Schema;
 use yii\db\TableSchema;
 use yii\gii\CodeFile;
 use yii\helpers\Inflector;
@@ -997,6 +998,9 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
                 case Schema::TYPE_MONEY:
                     $types['number'][] = $column->name;
                     break;
+                case Schema::TYPE_UUID:
+                    $types['\gvasilopulos\enhancedgii\validators\UuidValidator'][] = $column->name;
+                    break;
                 case Schema::TYPE_DATE:
                 case Schema::TYPE_TIME:
                 case Schema::TYPE_DATETIME:
@@ -1087,8 +1091,11 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
                 case Schema::TYPE_TIMESTAMP:
                     $hashConditions[] = "'{$column}' => \$this->{$column},";
                     break;
-                default:
-                    $likeConditions[] = "->andFilterWhere(['like', '{$column}', \$this->{$column}])";
+                case Schema::TYPE_UUID:
+                    $likeConditions[] = "->andFilterWhere(['=','{$column}', \$this->{$column}])";
+                break;
+                    default:
+                    $likeConditions[] = "->andFilterWhere(['ilike', '{$column}', \$this->{$column}])";
                     break;
             }
         }
