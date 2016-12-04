@@ -1,8 +1,17 @@
 # yii2-enhanced-gii
 Yii2 Gii (generator) with Relation forked from https://github.com/mootensai/yii2-enhanced-gii
 
+Specific for postgres with uuid id's generated from php through ramsey/uuid
 
+You have to add this to your configuration db connection setting so it detects uuid column properly
 
+           'schemaMap' => [
+            'pgsql'=> [
+            'class'=>'gvasilopulos\enhancedgii\db\pgsql\Schema',
+            'defaultSchema' => 'public' //specify your schema here
+             ],
+            ],
+You can change the Schema name to whatever you use 
 
 [![Yii2](https://img.shields.io/badge/Powered_by-Yii_Framework-green.svg?style=flat)](http://www.yiiframework.com/)
 ## Installation
