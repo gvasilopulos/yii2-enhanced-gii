@@ -666,7 +666,9 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
             $tableSchema = $this->getTableSchema();
         }
         if (in_array($attribute, $this->hiddenColumns)) {
-            return "\"$attribute\" => ['type' => TabularForm::INPUT_HIDDEN, 'visible' => false]";
+        //this is an overkill and it seems to break things by recreating id's on related tables! 
+        //   return "\"$attribute\" => ['type' => TabularForm::INPUT_HIDDEN, 'visible' => false]";
+            return "\"$attribute\" => ['type' => TabularForm::INPUT_HIDDEN]";
         }
         $humanize = Inflector::humanize($attribute, true);
         if ($tableSchema === false || !isset($tableSchema->columns[$attribute])) {
@@ -678,7 +680,10 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
         }
         $column = $tableSchema->columns[$attribute];
         if ($column->autoIncrement) {
-            return "'$attribute' => ['type' => TabularForm::INPUT_HIDDEN, 'visible' => false]";
+            //probably the same as above 
+            //return "'$attribute' => ['type' => TabularForm::INPUT_HIDDEN, 'visible' => false]";
+                return "'$attribute' => ['type' => TabularForm::INPUT_HIDDEN]";
+            //if it is INPUT_HIDDEN IT DOES NOT DISPLAY ANYWAY
         } elseif ($column->phpType === 'boolean' || $column->dbType === 'tinyint(1)') {
             return "'$attribute' => ['type' => TabularForm::INPUT_CHECKBOX,
             'options' => [
