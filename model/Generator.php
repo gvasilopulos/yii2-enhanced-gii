@@ -397,7 +397,10 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator {
                 continue;
             }  //if it is a uuid column then do not ask from the user to enter it
             if (!$column->allowNull && $column->defaultValue === null ) {
-                if(($this->isTree && in_array($column->name,['lft', 'rgt', 'lvl'])) || ($column->name==$this->UUIDColumn)){
+                if(($this->isTree && in_array($column->name,['lft', 'rgt', 'lvl'])) || 
+                        ($column->name==$this->UUIDColumn)|| 
+                        ($column->name==$this->createdAt)||
+                       ($column->name==$this->createdBy) ){
 
                 }else{
                     $types['required'][] = $column->name;
