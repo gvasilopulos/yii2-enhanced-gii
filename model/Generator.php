@@ -400,7 +400,9 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator {
                 if(($this->isTree && in_array($column->name,['lft', 'rgt', 'lvl'])) || 
                         ($column->name==$this->UUIDColumn)|| 
                         ($column->name==$this->createdAt)||
-                       ($column->name==$this->createdBy) ){
+                        ($column->name==$this->updatedAt)||
+                        ($column->name==$this->createdBy)||
+                        ($column->name==$this->updatedBy)){
 
                 }else{
                     $types['required'][] = $column->name;
