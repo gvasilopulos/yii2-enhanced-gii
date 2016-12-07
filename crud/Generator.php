@@ -701,7 +701,7 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
             'options' => [
                 'type' => \\kartik\\datecontrol\\DateControl::FORMAT_DATE,
                 'saveFormat' => 'php:Y-m-d',
-                'displayFormat'=>'php:d-m-Y'
+                'displayFormat'=>'php:d-m-Y',
                 'ajaxConversion' => true,
                 'options' => [
                     'pluginOptions' => [
