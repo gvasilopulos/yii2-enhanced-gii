@@ -732,6 +732,7 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
             'options' => [
                 'type' => \\kartik\\datecontrol\\DateControl::FORMAT_DATETIME,
                 'saveFormat' => 'php:Y-m-d H:i:s',
+                'displayFormat' => 'php:d-m-Y H:i:s',
                 'ajaxConversion' => true,
                 'options' => [
                     'pluginOptions' => [
