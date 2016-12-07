@@ -640,7 +640,10 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
                 'attribute' => '$attribute',
                 'label' => " . $this->generateString(ucwords(Inflector::humanize($rel[5]))) . ",
                 'value' => function(\$model){
-                    return \$model->$rel[7]->$labelCol;
+                    if (\$model->$rel[7])
+                    {return \$model->$rel[7]->$labelCol;}
+                    else
+                    {return \'-\';}
                 },
                 'filterType' => GridView::FILTER_SELECT2,
                 'filter' => \\yii\\helpers\\ArrayHelper::map(\\$this->nsModel\\$rel[1]::find()->asArray()->all(), '{$rel[self::REL_PRIMARY_KEY]}', '$labelCol'),
@@ -698,6 +701,7 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
             'options' => [
                 'type' => \\kartik\\datecontrol\\DateControl::FORMAT_DATE,
                 'saveFormat' => 'php:Y-m-d',
+                'language'=>'el'
                 'ajaxConversion' => true,
                 'options' => [
                     'pluginOptions' => [
