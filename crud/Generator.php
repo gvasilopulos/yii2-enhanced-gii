@@ -726,7 +726,7 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
                 ]
             ]
         ]";
-        } elseif ($column->dbType === 'datetime') {
+        } elseif ($column->dbType === 'timestamp') {
             return "'$attribute' => ['type' => TabularForm::INPUT_WIDGET,
             'widgetClass' => \\kartik\\datecontrol\\DateControl::classname(),
             'options' => [
@@ -742,7 +742,25 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
                 ],
             ]
         ]";
-        } elseif (array_key_exists($column->name, $fk)) {
+        }
+        elseif ($column->dbType === 'datetime') {
+            return "'$attribute' => ['type' => TabularForm::INPUT_WIDGET,
+            'widgetClass' => \\kartik\\datecontrol\\DateControl::classname(),
+            'options' => [
+                'type' => \\kartik\\datecontrol\\DateControl::FORMAT_DATETIME,
+                'saveFormat' => 'php:Y-m-d H:i:s',
+                'displayFormat' => 'php:d-m-Y H:i:s',
+                'ajaxConversion' => true,
+                'options' => [
+                    'pluginOptions' => [
+                        'placeholder' => " . $this->generateString('Choose ' . $humanize) . ",
+                        'autoclose' => true,
+                    ]
+                ],
+            ]
+        ]";
+        }
+        elseif (array_key_exists($column->name, $fk)) {
             $rel = $fk[$column->name];
             $labelCol = $this->getNameAttributeFK($rel[self::REL_TABLE]);
             $humanize = Inflector::humanize($rel[self::REL_TABLE]);
