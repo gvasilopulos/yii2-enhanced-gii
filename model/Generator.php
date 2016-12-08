@@ -428,7 +428,6 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator {
                     break;
                 case Schema::TYPE_DATE:                   
                     $types['safe'][] = $column->name;
-                    $types['date'][]=$column->name;
                     break;
                 case Schema::TYPE_TIME:
                 case Schema::TYPE_DATETIME:    
