@@ -660,8 +660,7 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
            { $output = "[
                 'attribute' => '$attribute',
                 'label' => " . $this->generateString(ucwords(Inflector::humanize($rel[5]))) . ",
-                'value' => function(\$model){
-                     (\$model->$rel[7])
+                'value' => function(\$model){                   
                     return \$model->$rel[7]->$labelCol;                   
                 },
                 'filterType' => GridView::FILTER_SELECT2,
