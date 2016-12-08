@@ -755,6 +755,7 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
                 'displayFormat' => 'php:d-m-Y H:i:s',
                 'ajaxConversion' => true,
                 'options' => [
+                    'Module::FORMAT_DATETIME' => 'php:Y-m-d H:i:s',
                     'pluginOptions' => [
                         'placeholder' => " . $this->generateString('Choose ' . $humanize) . ",
                         'autoclose' => true,
