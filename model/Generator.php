@@ -427,8 +427,8 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator {
                     $types['gvasilopulos\enhancedgii\validators\UuidValidator'][] = $column->name;
                     break;
                 case Schema::TYPE_DATE:                   
-                    $types['safe'][] = $column->name;
-                    break;
+                    $types['safe'][] = $column->name; 
+                    break; //for future use
                 case Schema::TYPE_TIME:
                 case Schema::TYPE_DATETIME:    
                 case Schema::TYPE_TIMESTAMP:
