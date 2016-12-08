@@ -630,20 +630,22 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
 //        if($column->autoIncrement){
 //            return "";
 //        } else
+   
         if (array_key_exists($attribute, $fk) && $attribute) {
             $rel = $fk[$attribute];
             $labelCol = $this->getNameAttributeFK($rel[3]);
             $humanize = Inflector::humanize($rel[3]);
             $id = 'grid-' . Inflector::camel2id(StringHelper::basename($this->searchModelClass)) . '-' . $attribute;
 //            $modelRel = $rel[2] ? lcfirst(Inflector::pluralize($rel[1])) : lcfirst($rel[1]);
-            $output = "[
+           if ($column->allowNull)
+           { $output = "[
                 'attribute' => '$attribute',
                 'label' => " . $this->generateString(ucwords(Inflector::humanize($rel[5]))) . ",
                 'value' => function(\$model){
                     if (\$model->$rel[7])
                     {return \$model->$rel[7]->$labelCol;}
                     else
-                    {return '-';}
+                    {return NULL;}
                 },
                 'filterType' => GridView::FILTER_SELECT2,
                 'filter' => \\yii\\helpers\\ArrayHelper::map(\\$this->nsModel\\$rel[1]::find()->asArray()->all(), '{$rel[self::REL_PRIMARY_KEY]}', '$labelCol'),
@@ -652,7 +654,25 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
                 ],
                 'filterInputOptions' => ['placeholder' => '$humanize', 'id' => '$id']
             ],\n";
-            return $output;
+           return $output;
+           }
+           else 
+           { $output = "[
+                'attribute' => '$attribute',
+                'label' => " . $this->generateString(ucwords(Inflector::humanize($rel[5]))) . ",
+                'value' => function(\$model){
+                     (\$model->$rel[7])
+                    return \$model->$rel[7]->$labelCol;                   
+                },
+                'filterType' => GridView::FILTER_SELECT2,
+                'filter' => \\yii\\helpers\\ArrayHelper::map(\\$this->nsModel\\$rel[1]::find()->asArray()->all(), '{$rel[self::REL_PRIMARY_KEY]}', '$labelCol'),
+                'filterWidgetOptions' => [
+                    'pluginOptions' => ['allowClear' => true],
+                ],
+                'filterInputOptions' => ['placeholder' => '$humanize', 'id' => '$id']
+            ],\n";
+           return $output;                          
+           }
         } else {
             return "'$attribute" . ($format === 'text' ? "" : ":" . $format) . "',\n";
         }
