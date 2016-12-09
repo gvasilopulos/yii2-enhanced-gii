@@ -28,6 +28,10 @@ class UuidHelper
     {
         return Uuid::uuid4()->toString();
     }
+     public static function uuid1()
+    {
+        return Uuid::uuid1()->toString();
+    }
 
     /**
      * Checks if the given string looks like a UUID in the canonical format,

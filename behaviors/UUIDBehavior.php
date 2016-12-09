@@ -23,6 +23,10 @@ class UUIDBehavior extends Behavior
             $this->owner->{$this->column} = $this->createUUID();
         }
     }
+    public function createUUID1()
+    {
+        return UuidHelper::uuid1();
+    }
     public function createUUID()
     {
         return UuidHelper::uuid();
