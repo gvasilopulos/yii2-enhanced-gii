@@ -61,6 +61,10 @@ Then you must add this code at your config\main.php.
           // see settings on http://demos.krajee.com/tree-manager#module
       ]
 ... // your another module
+      'dynagrid'=> [
+        'class'=>'\kartik\dynagrid\Module',
+        // other module settings
+      ],
     ],
 ```
 See gridview settings on http://demos.krajee.com/grid#module
@@ -90,7 +94,9 @@ Go to your gii tools, and notice the new IO Generator for models & CRUD
 7. Set pluralize or not
 8. PDF Printable view
 9. Expandable / collapsible row at index grid view for related data
-
+10. generate dynagrid grid view for index.php if you choose mediman template on crud (you need to add tbl_dynagrid and tbl_dynagrid_dtl 
+    tables on your database or set the appropriate tables on module settings as described 
+    in http://demos.krajee.com/dynagrid#module 
 ## Migration Generator :
 1. Generate migration from your database structure (based on : https://github.com/deesoft/yii2-gii)
 

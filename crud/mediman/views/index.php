@@ -9,6 +9,7 @@ use yii\helpers\StringHelper;
 $urlParams = $generator->generateUrlParams();
 $nameAttribute = $generator->getNameAttribute();
 $tableSchema = $generator->getTableSchema();
+$mytableName = $generator->getTableSchema()->name;
 $baseModelClass = StringHelper::basename($generator->modelClass);
 $fk = $generator->generateFK($tableSchema);
 echo "<?php\n";
@@ -20,7 +21,8 @@ echo "<?php\n";
 
 use yii\helpers\Html;
 use kartik\export\ExportMenu;
-use <?= $generator->indexWidgetType === 'grid' ? "kartik\\grid\\GridView;" : "yii\\widgets\\ListView;" ?>
+use kartik\grid\GridView;
+use <?= $generator->indexWidgetType === 'grid' ? "kartik\\dynagrid\\DynaGrid;" : "yii\\widgets\\ListView;" ?>
 
 
 $this->title = <?= ($generator->pluralize) ? $generator->generateString(Inflector::pluralize(Inflector::camel2words($baseModelClass))) : $generator->generateString(Inflector::camel2words($baseModelClass)) ?>;
@@ -54,7 +56,7 @@ if ($generator->indexWidgetType === 'grid'):
 ?>
 <?= "<?php \n" ?>
     $gridColumn = [
-        ['class' => 'yii\grid\SerialColumn'],
+        ['class' => 'kartik\grid\SerialColumn'], 
 <?php
     if ($generator->expandable):
 ?>
@@ -91,7 +93,8 @@ if ($generator->indexWidgetType === 'grid'):
             endif;
         endforeach; ?>
         [
-            'class' => 'yii\grid\ActionColumn',
+            'class' => 'kartik\grid\ActionColumn',
+            'dropdown'=>false,
 <?php if($generator->saveAsNew): ?>
             'template' => '{save-as-new} {view} {update} {delete}',
             'buttons' => [
@@ -106,15 +109,23 @@ if ($generator->indexWidgetType === 'grid'):
     endif; 
 ?>
     ?>
-    <?= "<?= " ?>GridView::widget([
+    <?= "<?= " ?>DynaGrid::widget([
+        
+        'columns'=>$gridColumn,
+        'storage'=>DynaGrid::TYPE_DB,
+        'userSpecific'=>true,
+        'gridOptions'=>[
         'dataProvider' => $dataProvider,
-        <?= !empty($generator->searchModelClass) ? "'filterModel' => \$searchModel,\n        'columns' => \$gridColumn,\n" : "'columns' => \$gridColumn,\n"; ?>
-        'pjax' => true,
+         <?= !empty($generator->searchModelClass) ? "'filterModel' => \$searchModel,\n        'columns' => \$gridColumn,\n" : "'columns' => \$gridColumn,\n"; ?>
+        'pjax' => true,        
         'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-<?= Inflector::camel2id(StringHelper::basename($generator->modelClass))?>']],
         'panel' => [
             'type' => GridView::TYPE_PRIMARY,
             'heading' => '<span class="glyphicon glyphicon-book"></span>  ' . Html::encode($this->title),
-        ],
+            'before'=>'{dynagrid}{dynagridFilter}{dynagridSort}' . Html::a('Custom Button', '#', ['class'=>'btn btn-default'])
+        ], 
+        
+        
 <?php if(!$generator->pdf) : ?>
         'export' => false,
 <?php endif; ?>
@@ -140,6 +151,8 @@ if ($generator->indexWidgetType === 'grid'):
 <?php endif;?>
             ]) ,
         ],
+        ],
+      'options'=>['id'=>'dynagrid-<?= $mytableName ?><?="'"?>],   
     ]); ?>
 <?php 
 else: 
