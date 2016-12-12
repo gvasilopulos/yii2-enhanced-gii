@@ -21,7 +21,8 @@ echo "<?php\n";
 
 use yii\helpers\Html;
 use kartik\export\ExportMenu;
-use kartik\grid\GridView;
+use gvasilopulos\enhancedgii\grid\GridView;
+use kartik\datecontrol\DateControl;
 use <?= $generator->indexWidgetType === 'grid' ? "kartik\\dynagrid\\DynaGrid;" : "yii\\widgets\\ListView;" ?>
 
 
@@ -112,7 +113,6 @@ if ($generator->indexWidgetType === 'grid'):
     <?= "<?= " ?>DynaGrid::widget([
         
         'columns'=>$gridColumn,
-        'storage'=>DynaGrid::TYPE_DB,
         'userSpecific'=>true,
         'gridOptions'=>[
         'dataProvider' => $dataProvider,

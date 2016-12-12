@@ -577,9 +577,10 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
         if ($tableSchema === false || !isset($tableSchema->columns[$attribute])) {
             if (preg_match('/^(password|pass|passwd|passcode)$/i', $attribute)) {
                 return "";
-            } else {
-                return "'$attribute',\n";
-            }
+            } else 
+                {                
+                return "'$attribute',\n";                
+                }
         }
         $column = $tableSchema->columns[$attribute];
         $format = $this->generateColumnFormat($column);
@@ -592,15 +593,16 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
             }
             $labelCol = $this->getNameAttributeFK($rel[3]);
 //            $modelRel = $rel[2] ? lcfirst(Inflector::pluralize($rel[1])) : lcfirst($rel[1]);
-            $output = "[
+            $output = "[ 
                 'attribute' => '$rel[7].$labelCol',
                 'label' => " . $this->generateString(ucwords(Inflector::humanize($rel[5]))) . "
             ],\n";
             return $output;
-        } else {
-            return "'$attribute" . ($format === 'text' ? "" : ":" . $format) . "',\n";
-        }
-    }
+        } else {       
+            return "'$attribute" . ($format === 'text' ? "" : ":" . $format) . "',\n";       
+            }
+    
+  }
 
     /**
      * Generates code for Grid View field
@@ -673,9 +675,41 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
            return $output;                          
            }
         } else {
+            
+             if ($column->dbType=='date')
+             {
+               return "[
+                'attribute' => '$attribute',
+                'label' => " . $this->generateString(ucwords(Inflector::humanize($attribute))) . ",
+                'value' => function(\$model){
+                 \$humandate=  strtotime(\$model->$attribute);
+                  \$humandate=date('d-m-Y',\$humandate);
+                  return \$humandate;
+                },
+                 'filterType'=> GridView::FILTER_DATECONTROL, 
+          
+            'filterWidgetOptions' => [
+             'type' => DateControl::FORMAT_DATE,
+
+               'ajaxConversion'=>false,
+                'widgetOptions' => [   
+                                'type'=>3,         
+                                'pluginOptions' => [
+    
+                                    'autoclose'=>true,
+                                ],
+                         ],
+            ],
+              'format' => 'html',          ],";
+             }
+             else{
             return "'$attribute" . ($format === 'text' ? "" : ":" . $format) . "',\n";
-        }
+        
+            
+              }
     }
+    
+  }
 
     /**
      * Generates code for Kartik Tabular Form field
@@ -1162,3 +1196,10 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
     }
 
 }
+
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
