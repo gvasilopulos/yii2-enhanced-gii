@@ -674,11 +674,10 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
             ],\n";
            return $output;                          
            }
-        } else {
-            
-             if ($column->dbType=='date')
+        }
+           elseif ($column->dbType=='date')
              {
-               return "[
+               $output = "[
                 'attribute' => '$attribute',
                 'label' => " . $this->generateString(ucwords(Inflector::humanize($attribute))) . ",
                 'value' => function(\$model){
@@ -700,14 +699,98 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
                                 ],
                          ],
             ],
-              'format' => 'html',          ],";
+              'format' => 'html',          ],\n";
+               return $output;
              }
+        
+              elseif ($column->dbType=='timestamp')
+             {
+               $output = "[
+                'attribute' => '$attribute',
+                'label' => " . $this->generateString(ucwords(Inflector::humanize($attribute))) . ",
+                'value' => function(\$model){
+                 \$humandate=  strtotime(\$model->$attribute);
+                  \$humandate=date('d-m-Y H:i:s',\$humandate);
+                  return \$humandate;
+                },
+                 'filterType'=> GridView::FILTER_DATECONTROL, 
+          
+            'filterWidgetOptions' => [
+             'type' => DateControl::FORMAT_DATETIME,
+
+               'ajaxConversion'=>false,
+                'widgetOptions' => [   
+                                'type'=>3,         
+                                'pluginOptions' => [
+    
+                                    'autoclose'=>true,
+                                ],
+                         ],
+            ],
+              'format' => 'html',          ],\n";
+               return $output;
+             }
+             elseif ($column->dbType=='datetime')
+             {
+               $output = "[
+                'attribute' => '$attribute',
+                'label' => " . $this->generateString(ucwords(Inflector::humanize($attribute))) . ",
+                'value' => function(\$model){
+                 \$humandate=  strtotime(\$model->$attribute);
+                  \$humandate=date('d-m-Y H:i:s',\$humandate);
+                  return \$humandate;
+                },
+                 'filterType'=> GridView::FILTER_DATECONTROL, 
+          
+            'filterWidgetOptions' => [
+             'type' => DateControl::FORMAT_DATETIME,
+
+               'ajaxConversion'=>false,
+                'widgetOptions' => [   
+                                'type'=>3,         
+                                'pluginOptions' => [
+    
+                                    'autoclose'=>true,
+                                ],
+                         ],
+            ],
+              'format' => 'html',          ],\n";
+               return $output;
+             }
+             elseif ($column->dbType=='time')
+             {
+               $output = "[
+                'attribute' => '$attribute',
+                'label' => " . $this->generateString(ucwords(Inflector::humanize($attribute))) . ",
+                'value' => function(\$model){
+                 \$humandate=  strtotime(\$model->$attribute);
+                  \$humandate=date('H:i:s',\$humandate);
+                  return \$humandate;
+                },
+                 'filterType'=> GridView::FILTER_DATECONTROL, 
+          
+            'filterWidgetOptions' => [
+             'type' => DateControl::FORMAT_TIME,
+
+               'ajaxConversion'=>false,
+                'widgetOptions' => [   
+                                'type'=>3,         
+                                'pluginOptions' => [
+    
+                                    'autoclose'=>true,
+                                ],
+                         ],
+            ],
+              'format' => 'html',          ],\n";
+               return $output;
+             }
+             
              else{
             return "'$attribute" . ($format === 'text' ? "" : ":" . $format) . "',\n";
         
             
               }
-    }
+    
     
   }
 
@@ -753,9 +836,7 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
             'widgetClass' => \\kartik\\datecontrol\\DateControl::classname(),
             'options' => [
                 'type' => \\kartik\\datecontrol\\DateControl::FORMAT_DATE,
-                'saveFormat' => 'php:Y-m-d',
-                'displayFormat'=>'php:d-m-Y',
-                'ajaxConversion' => true,
+                'ajaxConversion' => false,
                 'options' => [
                     'pluginOptions' => [
                         'placeholder' => " . $this->generateString('Choose ' . $humanize) . ",
@@ -769,8 +850,7 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
             'widgetClass' => \\kartik\\datecontrol\\DateControl::classname(),
             'options' => [
                 'type' => \\kartik\\datecontrol\\DateControl::FORMAT_TIME,
-                'saveFormat' => 'php:H:i:s',
-                'ajaxConversion' => true,
+                'ajaxConversion' => false,
                 'options' => [
                     'pluginOptions' => [
                         'placeholder' => " . $this->generateString('Choose ' . $humanize) . ",
@@ -779,14 +859,12 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
                 ]
             ]
         ]";
-        } elseif ($column->dbType === 'timestamp') {
+        } elseif ($column->dbType == 'timestamp') {
             return "'$attribute' => ['type' => TabularForm::INPUT_WIDGET,
             'widgetClass' => \\kartik\\datecontrol\\DateControl::classname(),
             'options' => [
                 'type' => \\kartik\\datecontrol\\DateControl::FORMAT_DATETIME,
-                'saveFormat' => 'php:Y-m-d H:i:s',
-                'displayFormat' => 'php:d-m-Y H:i:s',
-                'ajaxConversion' => true,
+                'ajaxConversion' => false,
                 'options' => [
                     'Module::FORMAT_DATETIME' => 'php:Y-m-d H:i:s',
                     'pluginOptions' => [
@@ -802,9 +880,7 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
             'widgetClass' => \\kartik\\datecontrol\\DateControl::classname(),
             'options' => [
                 'type' => \\kartik\\datecontrol\\DateControl::FORMAT_DATETIME,
-                'saveFormat' => 'php:Y-m-d H:i:s',
-                'displayFormat' => 'php:d-m-Y H:i:s',
-                'ajaxConversion' => true,
+                'ajaxConversion' => false,
                 'options' => [
                     'pluginOptions' => [
                         'placeholder' => " . $this->generateString('Choose ' . $humanize) . ",
@@ -896,7 +972,6 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
         } elseif ($column->dbType === 'date') {
             return "\$form->field($model, '$attribute')->widget(\\kartik\\datecontrol\\DateControl::classname(), [
         'type' => \\kartik\\datecontrol\\DateControl::FORMAT_DATE,
-        'saveFormat' => 'php:Y-m-d',
         'ajaxConversion' => true,
         'options' => [
             'pluginOptions' => [
@@ -908,7 +983,6 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
         } elseif ($column->dbType === 'time') {
             return "\$form->field($model, '$attribute')->widget(\\kartik\\datecontrol\\DateControl::className(), [
         'type' => \\kartik\\datecontrol\\DateControl::FORMAT_TIME,
-        'saveFormat' => 'php:H:i:s',
         'ajaxConversion' => true,
         'options' => [
             'pluginOptions' => [
@@ -920,7 +994,17 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
         } elseif ($column->dbType === 'datetime') {
             return "\$form->field($model, '$attribute')->widget(\\kartik\\datecontrol\\DateControl::classname(), [
         'type' => \\kartik\\datecontrol\\DateControl::FORMAT_DATETIME,
-        'saveFormat' => 'php:Y-m-d H:i:s',
+        'ajaxConversion' => true,
+        'options' => [
+            'pluginOptions' => [
+                'placeholder' => " . $this->generateString('Choose ' . $placeholder) . ",
+                'autoclose' => true,
+            ]
+        ],
+    ]);";
+        } elseif ($column->dbType === 'timestamp') {
+            return "\$form->field($model, '$attribute')->widget(\\kartik\\datecontrol\\DateControl::classname(), [
+        'type' => \\kartik\\datecontrol\\DateControl::FORMAT_DATETIME,
         'ajaxConversion' => true,
         'options' => [
             'pluginOptions' => [
