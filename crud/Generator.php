@@ -595,7 +595,7 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
 //            $modelRel = $rel[2] ? lcfirst(Inflector::pluralize($rel[1])) : lcfirst($rel[1]);
             $output = "[ 
                 'attribute' => '$rel[7].$labelCol',
-                'label' => Yii::t('app'," . $this->generateString(ucwords(Inflector::humanize($rel[5]))) . "),
+                'label' =>  ". $this->generateString(ucwords(Inflector::humanize($rel[5]))) . ",
             ],\n";
             return $output;
         } else {       
