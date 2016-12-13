@@ -691,10 +691,10 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
              'type' => DateControl::FORMAT_DATE,
 
                'ajaxConversion'=>false,
-                'widgetOptions' => [   
+                'widgetOptions' => [  
+                                'options'=>['style'=>'width: 100px',],
                                 'type'=>3,         
-                                'pluginOptions' => [
-    
+                                'pluginOptions' => [  
                                     'autoclose'=>true,
                                 ],
                          ],
@@ -713,16 +713,14 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
                   \$humandate=date('d-m-Y H:i:s',\$humandate);
                   return \$humandate;
                 },
-                 'filterType'=> GridView::FILTER_DATECONTROL, 
-          
-            'filterWidgetOptions' => [
-             'type' => DateControl::FORMAT_DATETIME,
-
-               'ajaxConversion'=>false,
-                'widgetOptions' => [   
+                 'filterType'=> GridView::FILTER_DATECONTROL,           
+                 'filterWidgetOptions' => [
+                 'type' => DateControl::FORMAT_DATETIME,
+                 'ajaxConversion'=>false,
+                 'widgetOptions' => [
+                                'options'=>['style'=>'width: 140px',],
                                 'type'=>3,         
                                 'pluginOptions' => [
-    
                                     'autoclose'=>true,
                                 ],
                          ],
@@ -744,12 +742,11 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
           
             'filterWidgetOptions' => [
              'type' => DateControl::FORMAT_DATETIME,
-
                'ajaxConversion'=>false,
                 'widgetOptions' => [   
+                                'options'=>['style'=>'width: 140px',],
                                 'type'=>3,         
                                 'pluginOptions' => [
-    
                                     'autoclose'=>true,
                                 ],
                          ],
@@ -771,12 +768,11 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
           
             'filterWidgetOptions' => [
              'type' => DateControl::FORMAT_TIME,
-
                'ajaxConversion'=>false,
                 'widgetOptions' => [   
+                                'options'=>['style'=>'width: 100px',],
                                 'type'=>3,         
                                 'pluginOptions' => [
-    
                                     'autoclose'=>true,
                                 ],
                          ],
@@ -839,9 +835,10 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
                 'type' => \\kartik\\datecontrol\\DateControl::FORMAT_DATE,
                 'ajaxConversion' => false,
                 'options' => [
+                    'style'=>'width: 100px',
                     'pluginOptions' => [
                         'placeholder' => " . $this->generateString('Choose ' . $humanize) . ",
-                        'autoclose' => true
+                        'autoclose' => true,
                     ]
                 ],
             ]
@@ -854,9 +851,10 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
                 'type' => \\kartik\\datecontrol\\DateControl::FORMAT_TIME,
                 'ajaxConversion' => false,
                 'options' => [
+                    'style'=>'width: 100px',
                     'pluginOptions' => [
                         'placeholder' => " . $this->generateString('Choose ' . $humanize) . ",
-                        'autoclose' => true
+                        'autoclose' => true,
                     ]
                 ]
             ]
@@ -869,8 +867,8 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
                 'type' => \\kartik\\datecontrol\\DateControl::FORMAT_DATETIME,
                 'ajaxConversion' => false,
                 'options' => [
-                    'Module::FORMAT_DATETIME' => 'php:Y-m-d H:i:s',
-                    'pluginOptions' => [
+                        'style'=>'width: 140px',
+                        'pluginOptions' => [
                         'placeholder' => " . $this->generateString('Choose ' . $humanize) . ",
                         'autoclose' => true,
                     ]
@@ -886,6 +884,7 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
                 'type' => \\kartik\\datecontrol\\DateControl::FORMAT_DATETIME,
                 'ajaxConversion' => false,
                 'options' => [
+                'style'=>'width: 100px',
                     'pluginOptions' => [
                         'placeholder' => " . $this->generateString('Choose ' . $humanize) . ",
                         'autoclose' => true,
@@ -908,7 +907,7 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
                 'data' => \\yii\\helpers\\ArrayHelper::map($fkClassFQ::find()->orderBy('$labelCol')->asArray()->all(), '{$rel[self::REL_PRIMARY_KEY]}', '$labelCol'),
                 'options' => ['placeholder' => " . $this->generateString('Choose ' . $humanize) . "],
             ],
-            'columnOptions' => ['width' => '200px']
+            'columnOptions' => ['width' => '200px'],
         ]";
             return $output;
         } else {
