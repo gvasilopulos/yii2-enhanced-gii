@@ -595,7 +595,7 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
 //            $modelRel = $rel[2] ? lcfirst(Inflector::pluralize($rel[1])) : lcfirst($rel[1]);
             $output = "[ 
                 'attribute' => '$rel[7].$labelCol',
-                'label' => " . $this->generateString(ucwords(Inflector::humanize($rel[5]))) . "
+                'label' => Yii::t('app'," . $this->generateString(ucwords(Inflector::humanize($rel[5]))) . "),
             ],\n";
             return $output;
         } else {       
@@ -812,27 +812,28 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
         $humanize = Inflector::humanize($attribute, true);
         if ($tableSchema === false || !isset($tableSchema->columns[$attribute])) {
             if (preg_match('/^(password|pass|passwd|passcode)$/i', $attribute)) {
-                return "\"$attribute\" => ['type' => TabularForm::INPUT_PASSWORD]";
+                return "\"$attribute\" => ['label' => '". Yii::t('app', $humanize) ."', 'type' => TabularForm::INPUT_PASSWORD]";
             } else {
-                return "\"$attribute\" => ['type' => TabularForm::INPUT_TEXT]";
+                return "\"$attribute\" => ['label' => '". Yii::t('app', $humanize) ."', 'type' => TabularForm::INPUT_TEXT]";
             }
         }
         $column = $tableSchema->columns[$attribute];
         if ($column->autoIncrement) {
             //probably the same as above 
             //return "'$attribute' => ['type' => TabularForm::INPUT_HIDDEN, 'visible' => false]";
-                return "'$attribute' => ['type' => TabularForm::INPUT_HIDDEN]";
+                return "'$attribute' => ['label' => '". Yii::t('app', $humanize) ."', 'type' => TabularForm::INPUT_HIDDEN]";
             //if it is INPUT_HIDDEN IT DOES NOT DISPLAY ANYWAY
         } elseif ($column->phpType === 'boolean' || $column->dbType === 'tinyint(1)') {
-            return "'$attribute' => ['type' => TabularForm::INPUT_CHECKBOX,
+            return "'$attribute' => ['label' => '". Yii::t('app', $humanize) ."', 'type' => TabularForm::INPUT_CHECKBOX,
             'options' => [
                 'style' => 'position : relative; margin-top : -9px'
             ]
         ]";
         } elseif ($column->type === 'text' || $column->dbType === 'tinytext') {
-            return "'$attribute' => ['type' => TabularForm::INPUT_TEXTAREA]";
+            return "'$attribute' => ['label' => '". Yii::t('app', $humanize) ."', 'type' => TabularForm::INPUT_TEXTAREA]";
         } elseif ($column->dbType === 'date') {
             return "'$attribute' => ['type' => TabularForm::INPUT_WIDGET,
+                'label' => '". Yii::t('app', $humanize) ."',
             'widgetClass' => \\kartik\\datecontrol\\DateControl::classname(),
             'options' => [
                 'type' => \\kartik\\datecontrol\\DateControl::FORMAT_DATE,
@@ -847,6 +848,7 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
         ]";
         } elseif ($column->dbType === 'time') {
             return "'$attribute' => ['type' => TabularForm::INPUT_WIDGET,
+                'label' => '". Yii::t('app', $humanize) ."',
             'widgetClass' => \\kartik\\datecontrol\\DateControl::classname(),
             'options' => [
                 'type' => \\kartik\\datecontrol\\DateControl::FORMAT_TIME,
@@ -861,6 +863,7 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
         ]";
         } elseif ($column->dbType == 'timestamp') {
             return "'$attribute' => ['type' => TabularForm::INPUT_WIDGET,
+                'label' => '". Yii::t('app', $humanize) ."',
             'widgetClass' => \\kartik\\datecontrol\\DateControl::classname(),
             'options' => [
                 'type' => \\kartik\\datecontrol\\DateControl::FORMAT_DATETIME,
@@ -879,6 +882,7 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
             return "'$attribute' => ['type' => TabularForm::INPUT_WIDGET,
             'widgetClass' => \\kartik\\datecontrol\\DateControl::classname(),
             'options' => [
+            'label' => '". Yii::t('app', $humanize) ."',
                 'type' => \\kartik\\datecontrol\\DateControl::FORMAT_DATETIME,
                 'ajaxConversion' => false,
                 'options' => [
@@ -897,7 +901,7 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
 //            $pk = empty($this->tableSchema->primaryKey) ? $this->tableSchema->getColumnNames()[0] : $this->tableSchema->primaryKey[0];
             $fkClassFQ = "\\" . $this->nsModel . "\\" . $rel[self::REL_CLASS];
             $output = "'$attribute' => [
-            'label' => '$humanize',
+            'label' => '". Yii::t('app', $humanize) ."',
             'type' => TabularForm::INPUT_WIDGET,
             'widgetClass' => \\kartik\\widgets\\Select2::className(),
             'options' => [
@@ -918,7 +922,7 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
                 foreach ($column->enumValues as $enumValue) {
                     $dropDownOptions[$enumValue] = Inflector::humanize($enumValue);
                 }
-                return "'$attribute' => ['type' => TabularForm::INPUT_DROPDOWN_LIST,
+                return "'$attribute' => ['label' => '". Yii::t('app', $humanize) ."','type' => TabularForm::INPUT_DROPDOWN_LIST,
                     'items' => " . preg_replace("/\n\s*/", ' ', VarDumper::export($dropDownOptions)) . ",
                     'options' => [
                         'columnOptions' => ['width' => '185px'],
@@ -926,9 +930,9 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
                     ]
         ]";
             } elseif ($column->phpType !== 'string' || $column->size === null) {
-                return "'$attribute' => ['type' => TabularForm::$input]";
+                return "'$attribute' => ['label' => '". Yii::t('app', $humanize) ."', 'type' => TabularForm::$input]";
             } else {
-                return "'$attribute' => ['type' => TabularForm::$input]"; //max length??
+                return "'$attribute' => ['label' => '". Yii::t('app', $humanize) ."', 'type' => TabularForm::$input]"; //max length??
             }
         }
     }

@@ -73,6 +73,8 @@ See datecontrol settings on http://demos.krajee.com/datecontrol#module
 
 See treemanager settings on http://demos.krajee.com/tree-manager#module (If you use tree/nested relation table)
 
+See dynagrid settings on http://demos.krajee.com/dynagrid if you use mediman crud template!
+
 ## Usage :
 Go to your gii tools, and notice the new IO Generator for models & CRUD
 

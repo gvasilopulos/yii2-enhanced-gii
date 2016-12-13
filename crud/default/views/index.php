@@ -20,6 +20,8 @@ echo "<?php\n";
 
 use yii\helpers\Html;
 use kartik\export\ExportMenu;
+use gvasilopulos\enhancedgii\grid\GridView;
+use kartik\datecontrol\DateControl;
 use <?= $generator->indexWidgetType === 'grid' ? "kartik\\grid\\GridView;" : "yii\\widgets\\ListView;" ?>
 
 
