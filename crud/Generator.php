@@ -710,7 +710,7 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
                 'label' => " . $this->generateString(ucwords(Inflector::humanize($attribute))) . ",
                 'value' => function(\$model){
                  \$humandate=  strtotime(\$model->$attribute);
-                  \$humandate=date('d-m-Y H:i:s',\$humandate);
+                  \$humandate=date('d-m-Y H:i',\$humandate);
                   return \$humandate;
                 },
                  'filterType'=> GridView::FILTER_DATECONTROL,           
@@ -735,7 +735,7 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
                 'label' => " . $this->generateString(ucwords(Inflector::humanize($attribute))) . ",
                 'value' => function(\$model){
                  \$humandate=  strtotime(\$model->$attribute);
-                  \$humandate=date('d-m-Y H:i:s',\$humandate);
+                  \$humandate=date('d-m-Y H:i',\$humandate);
                   return \$humandate;
                 },
                  'filterType'=> GridView::FILTER_DATECONTROL, 
@@ -761,7 +761,7 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
                 'label' => " . $this->generateString(ucwords(Inflector::humanize($attribute))) . ",
                 'value' => function(\$model){
                  \$humandate=  strtotime(\$model->$attribute);
-                  \$humandate=date('H:i:s',\$humandate);
+                  \$humandate=date('H:i',\$humandate);
                   return \$humandate;
                 },
                  'filterType'=> GridView::FILTER_DATECONTROL, 
