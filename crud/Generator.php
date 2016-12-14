@@ -829,6 +829,7 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
             return "'$attribute' => ['label' => '". Yii::t('app', $humanize) ."', 'type' => TabularForm::INPUT_TEXTAREA]";
         } elseif ($column->dbType === 'date') {
             return "'$attribute' => ['type' => TabularForm::INPUT_WIDGET,
+                'inputContainer'=>['style'=>'min-width :180px'],
                 'label' => '". Yii::t('app', $humanize) ."',
             'widgetClass' => \\kartik\\datecontrol\\DateControl::classname(),
             'options' => [
@@ -845,52 +846,52 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
         ]";
         } elseif ($column->dbType === 'time') {
             return "'$attribute' => ['type' => TabularForm::INPUT_WIDGET,
+                'inputContainer'=>['style'=>'min-width :180px'],
                 'label' => '". Yii::t('app', $humanize) ."',
             'widgetClass' => \\kartik\\datecontrol\\DateControl::classname(),
             'options' => [
                 'type' => \\kartik\\datecontrol\\DateControl::FORMAT_TIME,
                 'ajaxConversion' => false,
                 'options' => [
-                    'style'=>'width: 100px',
                     'pluginOptions' => [
                         'placeholder' => " . $this->generateString('Choose ' . $humanize) . ",
                         'autoclose' => true,
-                    ]
-                ]
-            ]
+                    ],
+                ],
+            ],
         ]";
         } elseif ($column->dbType == 'timestamp') {
             return "'$attribute' => ['type' => TabularForm::INPUT_WIDGET,
+                'inputContainer'=>['style'=>'min-width :220px'],
                 'label' => '". Yii::t('app', $humanize) ."',
             'widgetClass' => \\kartik\\datecontrol\\DateControl::classname(),
             'options' => [
                 'type' => \\kartik\\datecontrol\\DateControl::FORMAT_DATETIME,
                 'ajaxConversion' => false,
                 'options' => [
-                        'style'=>'width: 140px',
                         'pluginOptions' => [
                         'placeholder' => " . $this->generateString('Choose ' . $humanize) . ",
                         'autoclose' => true,
-                    ]
+                    ],
                 ],
-            ]
+            ],
         ]";
         }
         elseif ($column->dbType === 'datetime') {
             return "'$attribute' => ['type' => TabularForm::INPUT_WIDGET,
+             'inputContainer'=>['style'=>'min-width :220px'],
             'widgetClass' => \\kartik\\datecontrol\\DateControl::classname(),
             'options' => [
             'label' => '". Yii::t('app', $humanize) ."',
                 'type' => \\kartik\\datecontrol\\DateControl::FORMAT_DATETIME,
                 'ajaxConversion' => false,
                 'options' => [
-                'style'=>'width: 100px',
                     'pluginOptions' => [
                         'placeholder' => " . $this->generateString('Choose ' . $humanize) . ",
                         'autoclose' => true,
-                    ]
+                    ],
                 ],
-            ]
+            ],
         ]";
         }
         elseif (array_key_exists($column->name, $fk)) {
