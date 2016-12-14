@@ -932,7 +932,7 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
             } elseif ($column->phpType !== 'string' || $column->size === null) {
                 return "'$attribute' => ['label' => '". Yii::t('app', $humanize) ."', 'type' => TabularForm::$input]";
             } else {
-                return "'$attribute' => ['label' => '". Yii::t('app', $humanize) ."', 'type' => TabularForm::$input]"; //max length??
+                return "'$attribute' => ['label' => '". Yii::t('app', $humanize) ."', 'type' => TabularForm::$input, 'inputContainer'=>['style'=>'min-width :220px'],]"; //max length??
             }
         }
     }
@@ -1014,7 +1014,7 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
             'pluginOptions' => [
                 'placeholder' => " . $this->generateString('Choose ' . $placeholder) . ",
                 'autoclose' => true,
-            ]
+            ],
         ],
     ]);";
         } elseif (array_key_exists($column->name, $fk)) {
