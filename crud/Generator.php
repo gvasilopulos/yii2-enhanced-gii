@@ -25,7 +25,7 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
 
     public $nameAttribute = 'name, title, username';
     public $hiddenColumns = 'id, lock';
-    public $skippedColumns = 'created_at, updated_at, created_by, updated_by, deleted_at, deleted_by, created, modified, deleted';
+    public $skippedColumns = 'created_at, updated_at, created_by, updated_by, deleted_at, deleted_by, created, modified, deleted';    
     public $nsModel = 'app\models';
     public $nsSearchModel = 'app\models';
     public $generateSearchModel;
@@ -797,14 +797,18 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
      */
     public function generateTabularFormField($attribute, $fk, $tableSchema = null)
     {
+        
         if (is_null($tableSchema)) {
             $tableSchema = $this->getTableSchema();
         }
         if (in_array($attribute, $this->hiddenColumns)) {
         //this is an overkill and it seems to break things by recreating id's on related tables! 
         //   return "\"$attribute\" => ['type' => TabularForm::INPUT_HIDDEN, 'visible' => false]";
-            return "\"$attribute\" => ['type' => TabularForm::INPUT_HIDDEN]";
-        }
+
+                return "'$attribute' => ['type' => TabularForm::INPUT_HIDDEN]";
+        } 
+
+               
         $humanize = Inflector::humanize($attribute, true);
         if ($tableSchema === false || !isset($tableSchema->columns[$attribute])) {
             if (preg_match('/^(password|pass|passwd|passcode)$/i', $attribute)) {
@@ -840,9 +844,9 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
                     'pluginOptions' => [
                         'placeholder' => " . $this->generateString('Choose ' . $humanize) . ",
                         'autoclose' => true,
-                    ]
+                    ],
                 ],
-            ]
+            ],
         ]";
         } elseif ($column->dbType === 'time') {
             return "'$attribute' => ['type' => TabularForm::INPUT_WIDGET,
@@ -927,7 +931,7 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
                     'options' => [
                         'columnOptions' => ['width' => '185px'],
                         'options' => ['placeholder' => " . $this->generateString('Choose ' . $humanize) . "],
-                    ]
+                    ],
         ]";
             } elseif ($column->phpType !== 'string' || $column->size === null) {
                 return "'$attribute' => ['label' => '". Yii::t('app', $humanize) ."', 'type' => TabularForm::$input]";
@@ -980,8 +984,8 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
         'options' => [
             'pluginOptions' => [
                 'placeholder' => " . $this->generateString('Choose ' . $placeholder) . ",
-                'autoclose' => true
-            ]
+                'autoclose' => true,
+            ],
         ],
     ]);";
         } elseif ($column->dbType === 'time') {
@@ -991,9 +995,9 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
         'options' => [
             'pluginOptions' => [
                 'placeholder' => " . $this->generateString('Choose ' . $placeholder) . ",
-                'autoclose' => true
-            ]
-        ]
+                'autoclose' => true,
+            ],
+        ],
     ]);";
         } elseif ($column->dbType === 'datetime') {
             return "\$form->field($model, '$attribute')->widget(\\kartik\\datecontrol\\DateControl::classname(), [
@@ -1003,7 +1007,7 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
             'pluginOptions' => [
                 'placeholder' => " . $this->generateString('Choose ' . $placeholder) . ",
                 'autoclose' => true,
-            ]
+            ],
         ],
     ]);";
         } elseif ($column->dbType === 'timestamp') {
@@ -1027,7 +1031,7 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
         'data' => \\yii\\helpers\\ArrayHelper::map($fkClassFQ::find()->orderBy('$rel[4]')->asArray()->all(), '$rel[4]', '$labelCol'),
         'options' => ['placeholder' => " . $this->generateString('Choose ' . $humanize) . "],
         'pluginOptions' => [
-            'allowClear' => true
+            'allowClear' => true,
         ],
     ]);";
             return $output;
