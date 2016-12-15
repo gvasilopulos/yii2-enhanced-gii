@@ -117,10 +117,9 @@ if ($generator->indexWidgetType === 'grid'):
         'gridOptions'=>[
         'dataProvider' => $dataProvider,
          <?= !empty($generator->searchModelClass) ? "'filterModel' => \$searchModel,\n        'columns' => \$gridColumn,\n" : "'columns' => \$gridColumn,\n"; ?>
-        'pjax' => true,        
+        'pjax' => false,        
         'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-<?= Inflector::camel2id(StringHelper::basename($generator->modelClass))?>']],
         'panel' => [
-            'type' => GridView::TYPE_PRIMARY,
             'heading' => '<span class="glyphicon glyphicon-book"></span>  ' . Html::encode($this->title),
             'before'=>'{dynagrid}{dynagridFilter}{dynagridSort}' . Html::a('Custom Button', '#', ['class'=>'btn btn-default'])
         ], 
