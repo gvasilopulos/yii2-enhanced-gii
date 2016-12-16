@@ -117,7 +117,7 @@ if ($generator->indexWidgetType === 'grid'):
         'gridOptions'=>[
         'dataProvider' => $dataProvider,
          <?= !empty($generator->searchModelClass) ? "'filterModel' => \$searchModel,\n        'columns' => \$gridColumn,\n" : "'columns' => \$gridColumn,\n"; ?>
-        'pjax' => false,        
+        'pjax' => true,        
         'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-<?= Inflector::camel2id(StringHelper::basename($generator->modelClass))?>']],
         'panel' => [
             'heading' => '<span class="glyphicon glyphicon-book"></span>  ' . Html::encode($this->title),
