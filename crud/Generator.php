@@ -839,9 +839,8 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
             'options' => [
                 'type' => \\kartik\\datecontrol\\DateControl::FORMAT_DATE,
                 'ajaxConversion' => false,
-                'options' => [
-                    'style'=>'width: 100px',
-                    'pluginOptions' => [
+                'widgetOptions' => [
+                        'pluginOptions' => [
                         'placeholder' => " . $this->generateString('Choose ' . $humanize) . ",
                         'autoclose' => true,
                     ],
@@ -856,7 +855,7 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
             'options' => [
                 'type' => \\kartik\\datecontrol\\DateControl::FORMAT_TIME,
                 'ajaxConversion' => false,
-                'options' => [
+                'widgetOptions' => [
                     'pluginOptions' => [
                         'placeholder' => " . $this->generateString('Choose ' . $humanize) . ",
                         'autoclose' => true,
@@ -872,7 +871,7 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
             'options' => [
                 'type' => \\kartik\\datecontrol\\DateControl::FORMAT_DATETIME,
                 'ajaxConversion' => false,
-                'options' => [
+                'widgetOptions' => [
                         'pluginOptions' => [
                         'placeholder' => " . $this->generateString('Choose ' . $humanize) . ",
                         'autoclose' => true,
@@ -889,7 +888,7 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
             'label' => '". Yii::t('app', $humanize) ."',
                 'type' => \\kartik\\datecontrol\\DateControl::FORMAT_DATETIME,
                 'ajaxConversion' => false,
-                'options' => [
+                'widgetOptions' => [
                     'pluginOptions' => [
                         'placeholder' => " . $this->generateString('Choose ' . $humanize) . ",
                         'autoclose' => true,
@@ -981,7 +980,7 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
             return "\$form->field($model, '$attribute')->widget(\\kartik\\datecontrol\\DateControl::classname(), [
         'type' => \\kartik\\datecontrol\\DateControl::FORMAT_DATE,
         'ajaxConversion' => true,
-        'options' => [
+        'widgetOptions' => [
             'pluginOptions' => [
                 'placeholder' => " . $this->generateString('Choose ' . $placeholder) . ",
                 'autoclose' => true,
@@ -992,7 +991,7 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
             return "\$form->field($model, '$attribute')->widget(\\kartik\\datecontrol\\DateControl::className(), [
         'type' => \\kartik\\datecontrol\\DateControl::FORMAT_TIME,
         'ajaxConversion' => true,
-        'options' => [
+        'widgetOptions' => [
             'pluginOptions' => [
                 'placeholder' => " . $this->generateString('Choose ' . $placeholder) . ",
                 'autoclose' => true,
@@ -1003,7 +1002,7 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
             return "\$form->field($model, '$attribute')->widget(\\kartik\\datecontrol\\DateControl::classname(), [
         'type' => \\kartik\\datecontrol\\DateControl::FORMAT_DATETIME,
         'ajaxConversion' => true,
-        'options' => [
+        'widgetOptions' => [
             'pluginOptions' => [
                 'placeholder' => " . $this->generateString('Choose ' . $placeholder) . ",
                 'autoclose' => true,
@@ -1014,7 +1013,7 @@ class Generator extends \gvasilopulos\enhancedgii\BaseGenerator
             return "\$form->field($model, '$attribute')->widget(\\kartik\\datecontrol\\DateControl::classname(), [
         'type' => \\kartik\\datecontrol\\DateControl::FORMAT_DATETIME,
         'ajaxConversion' => true,
-        'options' => [
+        'widgetOptions' => [
             'pluginOptions' => [
                 'placeholder' => " . $this->generateString('Choose ' . $placeholder) . ",
                 'autoclose' => true,
