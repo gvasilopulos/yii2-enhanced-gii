@@ -144,6 +144,8 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
         if ($model->loadAll(Yii::$app->request->post()<?= !empty($generator->skippedRelations) ? ", [".implode(", ", $skippedRelations)."]" : ""; ?>) && $model->saveAll(<?= !empty($generator->skippedRelations) ? "[".implode(", ", $skippedRelations)."]" : ""; ?>)) {
             return $this->redirect(['view', <?= $urlParams ?>]);
         } else {
+               if ($model->id=='')
+               {$model->id=NULL;}
             return $this->render('create', [
                 'model' => $model,
             ]);
